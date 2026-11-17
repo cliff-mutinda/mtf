@@ -1,0 +1,48 @@
+# Render Web Service Blueprint for Flask Backend
+version: "1"
+
+services:
+  - type: web
+    name: contactpay-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: "false"
+      - key: AUTO_INIT_DB
+        value: "true"
+      # Database Configuration (entered in Render Dashboard)
+      - key: DATABASE_HOST
+        sync: false
+      - key: DATABASE_PORT
+        value: "37205"
+      - key: DATABASE_NAME
+        sync: false
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      # Safaricom Daraja M-Pesa Configuration
+      - key: MPESA_ENVIRONMENT
+        value: sandbox
+      - key: MPESA_CONSUMER_KEY
+        sync: false
+      - key: MPESA_CONSUMER_SECRET
+        sync: false
+      - key: MPESA_PASSKEY
+        sync: false
+      - key: MPESA_BUSINESS_SHORT_CODE
+        value: "174379"
+      - key: MPESA_ACCOUNT_REFERENCE
+        value: "Cliff's Sharp Boy Association"
+      - key: MPESA_CALLBACK_URL
+        sync: false
+      # Allowed Frontend Origin for CORS
+      - key: FRONTEND_URL
+        sync: false
