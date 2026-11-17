@@ -6,7 +6,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 
 try:
-    from .database import get_engine, init_db, get_session_factory, get_db
+    from database import get_engine, init_db, get_session_factory, get_db
     from .model import User
     from .routes.contacts import contacts_bp
     from .routes.mpesa import mpesa_bp
