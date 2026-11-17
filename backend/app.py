@@ -44,7 +44,7 @@ def create_app(config_override=None):
         app.config.update(config_override)
 
     # CORS configuration
-    frontend_env = os.getenv("FRONTEND_URL", "http://localhost:5173")
+    frontend_env = os.getenv("FRONTEND_URL", "http://localhost:5173,https://mtf.cliffmutinda.com")
     allowed_origins = [url.strip().rstrip("/") for url in frontend_env.split(",") if url.strip()]
     if "http://localhost:5173" not in allowed_origins:
         allowed_origins.append("http://localhost:5173")
